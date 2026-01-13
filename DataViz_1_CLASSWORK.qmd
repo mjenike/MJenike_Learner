@@ -1,0 +1,196 @@
+---
+title: "Data Visualization 1"
+format: html
+knitr:
+  opts_chunk:
+    fig-align: "center"
+    fig-width: 6
+    fig-height: 5
+---
+
+
+#### ---------------------------------------------------------------------------
+### Installing and loading packages into the R environment
+
+```{r}
+# install package
+
+# TEMPLATE: install.packages(package_name)
+
+# install.packages("tidyverse")
+
+# we only need to install a package once
+
+```
+
+
+```{r}
+# load package
+
+# TEMPLATE: library(package_name)
+
+library(tidyverse)
+
+# we will need to load a package every time we sytart a new session
+
+```
+
+
+
+#### ---------------------------------------------------------------------------
+### Loading data into the R environment
+
+```{r}
+
+library(Lock5Data)   # load package
+
+data("USStates2e")   # load dataset
+
+```
+
+
+```{r}
+
+?USStates2e   # help page
+
+```
+
+
+```{r}
+
+glimpse(USStates2e)
+
+# rows - 50 (one for each state)
+# columns - 22 (characteristics)
+# type of variables (because this guides us to what plot we are going to create)
+# numerical - represented by numbers, operations like addition, averaging makes sense
+# <dbl> - double, contnuous numerical variables, includes a decimal point
+# <int> - integer, discrete values, whole numbers
+
+# categorical - represented by strings/characters, words
+# <fct> - factor
+# <chr> - character
+
+```
+
+
+```{r}
+
+skimr::skim(USStates2e)  # more detailed summary of the dataset
+
+# package_name::function_name(dataset_name)
+
+```
+
+
+
+#### ---------------------------------------------------------------------------
+### Scatterplot (geom_point) - Chapter 1 of our textbook
+
+```{r}
+# TEMPLATE:
+# ggplot(data = dataset_name) +
+#   geom_point(aes(x = numerical_variable_name, y = numerical_variable_name)) +
+#   labs(x = "x_axis_label", y = "y_axis_label", title = "plot_title")
+
+# we will try to map variables from our dataset to aesthetics of the plot we want to create
+# a sactterplot is a graph of two numerical variables
+# what type of variable(s), how many?
+
+ggplot(data = USStates2e) +
+  geom_point(aes(x = PhysicalActivity, y = Obese)) +
+  labs(x = "Level of PhysicalActivity in percentage of people",
+       y = "Percentage of Obese residents",
+       title = "Negative relationship is evidence as expected")
+
+# ggplot(data = dataset_name) - R goes to the dataset
+# geom_point - what type of plot you want to create? for a scatterplot the geometrci object is called point - R knowws that we are creating a scatterplot
+# aesthetics - minimum x and y requored - R knows to map the x aesthetic to the PhyscialActivity variable, and the y aesthetic to the Obese variable
+# anything that the user wants on the plot (mainly labels) need to be inside double quotes
+
+
+```
+
+
+```{r}
+# PRACTICE - create a scatterplot between the variables College (x) and HouseholdIncome (y)
+
+# missing comma, or missing parentheses
+# to run incomplete code
+# wrong spellings
+# miss the + sign
+
+
+```
+
+
+```{r}
+# using other aesthetics - for example, color - (1) aesthetic mapped to a variable
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese,
+                           color = Region))
+
+```
+
+```{r}
+# INCORRECT USAGE
+# using other aesthetics - for example, color - (1) aesthetic mapped to a variable
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese),
+             color = Region)
+
+```
+
+
+
+```{r}
+# using other aesthetics - for example, color - (2) aesthetic as a global plot element
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese),
+             color = "blue")
+
+```
+
+```{r}
+# INCORRECT USAGE
+# using other aesthetics - for example, color - (2) aesthetic as a global plot element
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese,
+                           color = "blue"))
+
+```
+
+
+#### ---------------------------------------------------------------------------
+### Adding other geoms
+
+```{r}
+# add smoothing curves
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese))
+
+```
+
+
+```{r}
+# add texts
+
+ggplot(data = USStates2e) +
+  geom_point(mapping = aes(x = PhysicalActivity, y = Obese))
+
+```
+
+
+```{r}
+# a different way to write the code above
+
+
+
+```
+
+#### ---------------------------------------------------------------------------
